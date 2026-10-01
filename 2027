@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thailand Family Itinerary (Bilingual EN/MM)</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2b6cb0;
+            --accent: #d69e2e;
+            --bg: #f7fafc;
+            --card-bg: #ffffff;
+            --text: #2d3748;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        /* Very Top Language Switcher Bar */
+        .top-lang-bar {
+            background-color: var(--primary);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+
+        /* Section Navigation Bar Under Header */
+        .section-nav-bar {
+            background-color: var(--primary);
+            padding: 12px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            flex-wrap: wrap;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .lang-btn {
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid var(--accent);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .lang-btn.active {
+            background-color: var(--accent);
+            color: #1a202c;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            color: var(--secondary);
+            margin-top: 20px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 5px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+        }
+
+        /* Mobile Responsive Table Wrapper */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid var(--border);
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: #edf2f7;
+            color: var(--primary);
+            width: 30%;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .time-badge {
+            font-weight: bold;
+            color: var(--secondary);
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .note-box {
+            background-color: #fffaf0;
+            border-left: 4px solid var(--accent);
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .attraction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .attraction-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            background: #faf5ff;
+        }
+
+        .attraction-card h4 {
+            margin: 0 0 8px 0;
+            color: var(--primary);
+            font-size: 1.05rem;
+        }
+
+        /* Pure CSS display control for smooth, instant toggle */
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active-content {
+            display: block;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Mobile Optimization Rules */
+        @media (max-width: 768px) {
+            .container { padding: 12px 10px; }
+            header { padding: 20px 15px; text-align: center; }
+            h1 { font-size: 1.4rem; }
+            h2 { font-size: 1.2rem; }
+            .card { padding: 15px; }
+            .lang-btn { padding: 6px 14px; font-size: 0.85rem; }
+            th, td { padding: 8px 10px; font-size: 0.88rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- VERY TOP LANGUAGE SWITCHER BAR -->
+<div class="top-lang-bar">
+    <button class="lang-btn active" id="btn-en" onclick="switchLanguage('en')">🇬🇧 English</button>
+    <button class="lang-btn" id="btn-mm" onclick="switchLanguage('mm')">🇲🇲 မြန်မာ</button>
+</div>
+
+<div class="container">
+
+    <!-- ==================== ENGLISH CONTENT ==================== -->
+    <div id="lang-en" class="lang-content active-content">
+        <header>
+            <h1>🎉 Family Announcement: Thailand Family Trip 2027</h1>
+            <p><em>Join us for <strong>Zaw's Family Thailand Trip</strong> from <strong>January 16, 2027 to January 25, 2027</strong>!</em></p>
+        </header>
+
+        <!-- SECTION NAVIGATION LINKS -->
+        <div class="section-nav-bar">
+            <a href="#packing-section-en" class="lang-btn">🧳 PackingList</a>
+            <a href="#emergency-section-en" class="lang-btn">🚨 Emergency Contacts</a>
+            <a href="#flight-section-en" class="lang-btn">✈️ Flight Information</a>
+        </div>
+
+        <div class="card">
+            2. Thailand Multi-Generational Itinerary
+            <p><em>Bangkok, Koh Larn & Pattaya Family Expedition | Complete Transit, Beachfront Hotel & Local Eateries Schedule</em></p>
+            
+            <div class="table-responsive">
+                <table>
+                    <tr>
+                        <th><strong>Group Profile:</strong></th>
+                        <td>10 People (8 Adults, 1 Senior [67 with folding wheelchair], 2 Kids [4-year-old & 7-month-old])</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Accommodations:</strong></th>
+                        <td>
+                            • <strong>Bangkok (Main Base):</strong> Vince Hotel Bangkok Pratunam (Free late-night Khao Tom supper included)<br>
+                            • <strong>Koh Larn Island:</strong> The Sky & Sea Resort Beach Club (2-Night Stay: Jan 20 & 21)<br>
+                            • <strong>Pattaya Mainland:</strong> Jomtien Palm Beach Hotel & Resort (or Avalon Beach Resort) (2-Night Stay: Jan 22 & 23)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>Transit Strategy:</strong></th>
+                        <td>
+                            • <strong>Point-to-Point Local Transfers:</strong> 2x GrabXL / Bolt XL cars (Trunks accommodate folding wheelchair & strollers)<br>
+                            • <strong>Intercity Travel:</strong> Pre-booked Private 13-Seater Van Charter (Bangkok ↔ Pattaya ↔ BKK Airport)<br>
+                            • <strong>Water Transit:</strong> Chao Phraya Tourist Blue Boat (Bangkok River Views) & Speedboat/Ferry (Bali Hai Pier ↔ Koh Larn)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- NEARBY ATTRACTIONS NEAR VINCE HOTEL -->
+        <div class="card">
+            <h2>📍 Nearby Attractions & Shopping Around Vince Hotel Pratunam</h2>
+            <p><em>Walking and driving distance estimates from Vince Hotel Bangkok Pratunam:</em></p>
+            
+            <div class="attraction-grid">
+                <div class="attraction-card">
+                    <h4>🛍️ Platinum Fashion Mall</h4>
+                    <p><strong>Distance:</strong> ~750m</p>
+                    <p><strong>Walking:</strong> ~10 mins (flat street walk)</p>
+                    <p><strong>Driving:</strong> ~5 mins via Grab/Taxi</p>
+                    <p><small>Air-conditioned wholesale market for cheap clothes, shoes, and street snacks.</small></p>
+                </div>
+
+                <div class="attraction-card">
+                    <h4>🥢 Pratunam Market & Burmese Eateries</h4>
+                    <p><strong>Distance:</strong> ~200m – 500m</p>
+                    <p><strong>Walking:</strong> ~2–5 mins</p>
+                    <p><strong>Driving:</strong> ~2 mins</p>
+                    <p><small>Phetchaburi Soi 15 local food strip including Mandalay Food House, Thu Gyi Thar, Yo Yo Lay & Kalyana.</small></p>
+                </div>
+
+                <div class="attraction-card">
+                    <h4>🏙️ Baiyoke Tower II Observation Deck</h4>
+                    <p><strong>Distance:</strong> ~850m</p>
+                    <p><strong>Walking:</strong> ~12 mins</p>
+                    <p><strong>Driving:</strong> ~6 mins</p>
+                    <p><small>Panoramic 360° views of Bangkok's skyline from the 84th-floor revolving deck.</small></p>
+                </div>
+
+                <div class="attraction-card">
+                    <h4>🏬 Siam Paragon, Siam Center & SEA LIFE Aquarium</h4>
+                    <p><strong>Distance:</strong> ~1.2 km</p>
+                    <p><strong>Walking:</strong> ~15–18 mins (flat / elevated BTS skywalk)</p>
+                    <p><strong>Driving:</strong> ~7–10 mins</p>
+                    <p><small>World-class food hall, kid-friendly SEA LIFE Ocean World aquarium, and air-conditioned shopping.</small></p>
+                </div>
+
+                <div class="attraction-card">
+                    <h4>🛍️ CentralWorld & Trimurti Shrine</h4>
+                    <p><strong>Distance:</strong> ~1.3 km</p>
+                    <p><strong>Walking:</strong> ~16–18 mins</p>
+                    <p><strong>Driving:</strong> ~8–10 mins</p>
+                    <p><small>Massive lifestyle mall with kid play areas, food courts, and open plaza.</small></p>
+                </div>
+
+                <div class="attraction-card">
+                    <h4>🙏 The Erawan Shrine (Phra Phrom)</h4>
+                    <p><strong>Distance:</strong> ~1.5 km</p>
+                    <p><strong>Walking:</strong> ~18–20 mins (or BTS Skywalk)</p>
+                    <p><strong>Driving:</strong> ~8–12 mins</p>
+                    <p><small>Iconic open-air Hindu shrine at Ratchaprasong intersection with traditional Thai dance performances.</small></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAILY ITINERARY -->
+        <div class="card">
+            <h2>🕒 Daily Itinerary & Transit Schedule</h2>
+
+            <div class="note-box">
+                ℹ️ <strong>Note:</strong> This itinerary and schedule are flexible and subject to change based on traffic conditions, crowd levels, and the needs of our toddlers.
+            </div>
+
+            <h3>Thursday, Jan 14 – Travel Departure</h3>
+            <p><em>📌 Travel Flight Note: U.S. Travelers only – total travel time is approximately 21 hours.</em></p>
+            <div class="timeline-item">
+                <strong>In Flight:</strong> Departing toward Bangkok, Thailand from the U.S. En route.
+            </div>
+
+            <h3>Friday, Jan 15 – In Transit / Travel Day</h3>
+            <div class="timeline-item">
+                <strong>In Flight:</strong> Continuing long-haul transit travel journey toward Bangkok, Thailand.
+            </div>
+
+            <h3>Saturday, Jan 16 – Arrival, Vince Hotel Check-In, Local Burmese/Thai Dinner & Night Market</h3>
+            <div class="note-box">
+                📌 <em>Regional Flight Travel Note: Myanmar & Philippines travelers will travel on Jan 16 to meet the same-day arrival schedule with U.S. travelers.</em><br>
+                ⚠️ <em>Flight Booking Requirement: All arriving flights MUST be booked into Suvarnabhumi Airport (BKK) and scheduled to arrive between 12:00 PM and 06:00 PM.</em>
+            </div>
+            <div class="timeline-item"><span class="time-badge">Point A to B:</span> BKK Airport → Vince Hotel Bangkok Pratunam | <em>Method:</em> Private 13-Seater Van | <em>Transit Time:</em> ~45 minutes</div>
+            <div class="timeline-item"><span class="time-badge">Check-In:</span> Arrive at BKK Airport, transfer via Private Van to Vince Hotel Pratunam for check-in and rest.</div>
+            <div class="timeline-item"><span class="time-badge">Evening Dinner:</span> Walk 2 minutes to nearby Pratunam Burmese spots (Phetchaburi Soi 15) for shared family dinner.</div>
+            <div class="timeline-item"><span class="time-badge">Night Market Excursion:</span> After dinner, visit either Chatuchak Weekend Market (famous weekend market) or Jodd Fairs Night Market (Ratchada/Rama 9):
+                <ul style="margin: 5px 0 0 15px; padding: 0;">
+                    <li><strong>Chatuchak Weekend Market:</strong> Vince Hotel → Chatuchak Market | <em>Method:</em> 2x GrabXL / Bolt XL | <em>Transit Time:</em> ~20–25 mins</li>
+                    <li><strong>Jodd Fairs Night Market:</strong> Vince Hotel → Jodd Fairs | <em>Method:</em> 2x GrabXL / Bolt XL | <em>Transit Time:</em> ~15–20 mins</li>
+                </ul>
+            </div>
+            <div class="timeline-item"><span class="time-badge">Night Option:</span> Free late-night Khao Tom (rice porridge) supper available at Vince Hotel (9:00 PM – 11:00 PM).</div>
+
+            <h3>Sunday, Jan 17 – Wat Arun, Big Buddha (Wat Paknam), Hidden Bangkok Bistro, ICONSIAM & Wat Arun Night View</h3>
+            <div class="timeline-item"><span class="time-badge">07:45 AM</span> Vince Hotel Pratunam → Wat Arun (2x GrabXL / Bolt XL | ~25–30 mins)</div>
+            <div class="timeline-item"><span class="time-badge">08:15 AM</span> Explore Wat Arun temple grounds (2 hours).</div>
+            <div class="timeline-item"><span class="time-badge">10:15 AM</span> Wat Arun → Big Buddha (Wat Paknam Phasi Charoen) (2x GrabXL / Bolt XL | ~15–20 mins).</div>
+            <div class="timeline-item"><span class="time-badge">10:35 AM</span> Explore temple grounds and pray at Big Buddha (Wat Paknam) (1 hour).</div>
+            <div class="timeline-item"><span class="time-badge">11:35 AM</span> Big Buddha (Wat Paknam) → Hidden Bangkok Bistro (2x GrabXL / Bolt XL | ~10–15 mins) for lunch with river/temple views.</div>
+            <div class="timeline-item"><span class="time-badge">12:30 PM</span> Return to Vince Hotel for mid-day rest block (1:00 PM – 4:30 PM).</div>
+            <div class="timeline-item"><span class="time-badge">04:30 PM</span> Vince Hotel → ICONSIAM (2x GrabXL | ~30 mins) for dinner at Thipsamai / SookSiam and fountain show.</div>
+            <div class="timeline-item"><span class="time-badge">07:15 PM</span> ICONSIAM Pier → Tha Tien Pier (Chao Phraya Tourist Blue Boat | ~20 mins scenic cruise).</div>
+            <div class="timeline-item"><span class="time-badge">07:50 PM</span> Stroll Tha Tien promenade to view illuminated Wat Arun across the river.</div>
+            <div class="timeline-item"><span class="time-badge">08:30 PM</span> Tha Tien Pier → Vince Hotel Pratunam (2x GrabXL | ~20 mins).</div>
+
+            <h3>Monday, Jan 18 – Wat Phra Kaew, Grand Palace, Wat Pho & Asiatique The Riverfront</h3>
+            <div class="timeline-item"><span class="time-badge">08:00 AM</span> Vince Hotel → Grand Palace & Wat Phra Kaew (2x GrabXL | ~25 mins).</div>
+            <div class="timeline-item"><span class="time-badge">08:30 AM</span> Tour Emerald Buddha, Grand Palace, and Wat Pho (2.5 hours).</div>
+            <div class="timeline-item"><span class="time-badge">11:00 AM</span> Lunch at Tha Tien local noodle/rice spots.</div>
+            <div class="timeline-item"><span class="time-badge">12:30 PM</span> Return to Vince Hotel for mid-day rest (1:00 PM – 5:00 PM).</div>
+            <div class="timeline-item"><span class="time-badge">05:00 PM</span> Early dinner at Pratunam Burmese eateries (Yo Yo Lay / Kalyana).</div>
+            <div class="timeline-item"><span class="time-badge">06:30 PM</span> Vince Hotel → Asiatique The Riverfront (2x GrabXL | ~30 mins) for night stroll, shopping, and riverside atmosphere.</div>
+            <div class="timeline-item"><span class="time-badge">09:00 PM</span> Return to Vince Hotel Pratunam (2x GrabXL | ~30 mins).</div>
+
+            <h3>Tuesday, Jan 19 – Temple Tour, Siam Paragon & The Erawan Shrine Night Prayer</h3>
+            <div class="note-box">
+                🧺 <strong>Laundry Note:</strong> Laundry will be dropped off in the morning and picked up late night or next morning before heading to Koh Larn — so everyone will have fresh, folded clothes for 4 days in Koh Larn and Pattaya.
+            </div>
+            <div class="timeline-item"><span class="time-badge">08:30 AM</span> Vince Hotel → Wat Ratchanatdaram (Loha Prasat) (2x GrabXL | ~20 mins).</div>
+            <div class="timeline-item"><span class="time-badge">09:45 AM</span> Visit Wat Suthat Thepwararam & Giant Swing (5-min flat walk / wheelchair push).</div>
+            <div class="timeline-item"><span class="time-badge">11:00 AM</span> Visit Wat Traimit (Golden Buddha in Chinatown) (2x GrabXL | ~12 mins).</div>
+            <div class="timeline-item"><span class="time-badge">12:15 PM</span> Lunch at Siam Paragon Food Hall and afternoon rest block.</div>
+            <div class="timeline-item"><span class="time-badge">06:00 PM</span> Visit The Erawan Shrine (Phra Phrom) to see and participate in the vibrant night time prayer and traditional Thai dance performances.</div>
+            <div class="timeline-item"><span class="time-badge">07:30 PM</span> Return to Vince Hotel or explore nearby CentralWorld plaza.</div>
+
+            <div class="note-box">
+                💡 <strong>Luggage Packing Recommendation:</strong> It is highly recommended to consolidate your belongings into one suitcase along with backpacks and store the rest of your heavy luggage at Vince Hotel Bangkok Pratunam, since we will be returning here after 4 days. This will make commuting between Koh Larn Beach and Pattaya significantly easier without lugging heavy bags around—though this is entirely up to individual preference.
+            </div>
+
+            <h3>Wednesday, Jan 20 – Travel to Koh Larn Island via Ferry/Speedboat & Check-In Beach Resort (Night 1)</h3>
+            <div class="timeline-item"><span class="time-badge">10:00 AM</span> Vince Hotel Bangkok → Bali Hai Pier (Pattaya) (Private 13-Seater Van | ~2 hrs 15 mins via Highway 7).</div>
+            <div class="timeline-item"><span class="time-badge">12:30 PM</span> Arrive at Bali Hai Pier; lunch nearby or grab snacks before boarding ferry/speedboat.</div>
+            <div class="timeline-item"><span class="time-badge">01:15 PM</span> Bali Hai Pier → Koh Larn (Na Baan Pier) via Speedboat / Ferry (~20–45 mins).</div>
+            <div class="timeline-item"><span class="time-badge">02:00 PM</span> Check-in / drop bags at <strong>The Sky & Sea Resort Beach Club</strong> (check-in time ~2:00 PM).</div>
+            <div class="timeline-item"><span class="time-badge">03:00 PM</span> Afternoon swimming and beach relaxation at Tien Beach / Samae Beach.</div>
+            <div class="timeline-item"><span class="time-badge">06:00 PM</span> Sunset seafood dinner at Krua Samae Beach Restaurant.</div>
+
+            <h3>Thursday, Jan 21 – Koh Larn Island Beach Day & Island Dining (Night 2)</h3>
+            <div class="timeline-item"><span class="time-badge">09:45 AM</span> Morning shallow water beach play at Tien Beach (paved wheelchair access).</div>
+            <div class="timeline-item"><span class="time-badge">12:30 PM</span> Lunch at Indigo Cafe or Fat Submarine Cafe.</div>
+            <div class="timeline-item"><span class="time-badge">02:30 PM</span> Mid-day room rest block for kids and seniors at The Sky & Sea Resort.</div>
+            <div class="timeline-item"><span class="time-badge">06:00 PM</span> Family dinner at Pookai Cafe or local market stalls near Na Baan Pier.</div>
+
+            <h3>Friday, Jan 22 – Return to Pattaya Mainland, Check-In Beachfront Hotel, Sanctuary of Truth & Fire Show (Night 1)</h3>
+            <div class="timeline-item"><span class="time-badge">09:30 AM</span> The Sky & Sea Resort → Na Baan Pier via Resort Shuttle (5 mins).</div>
+            <div class="timeline-item"><span class="time-badge">10:00 AM</span> Na Baan Pier (Koh Larn) → Bali Hai Pier (Pattaya Mainland) via Speedboat / Ferry (~20–45 mins).</div>
+            <div class="timeline-item"><span class="time-badge">10:45 AM</span> Bali Hai Pier → Jomtien Palm Beach Hotel & Resort (2x GrabXL | ~15 mins). Check-in / drop bags and enjoy lunch along Dongtan Beach road.</div>
+            <div class="timeline-item"><span class="time-badge">01:30 PM</span> Rest block, pool time, or wheelchair strolling along Dongtan Beach promenade.</div>
+            <div class="timeline-item"><span class="time-badge">03:30 PM</span> Visit Sanctuary of Truth during cool late afternoon hours.</div>
+            <div class="timeline-item"><span class="time-badge">06:30 PM</span> Hotel → DAM Pattaya Restaurant for dinner and beachside fire show.</div>
+
+            <h3>Saturday, Jan 23 – Big Buddha Hill, Stone Buddha & 3 Mermaids Cafe (Night 2)</h3>
+            <div class="timeline-item"><span class="time-badge">08:30 AM</span> Visit Big Buddha Hill & Khao Chi Chan (Stone Buddha) (2x GrabXL | ~15–25 mins).</div>
+            <div class="timeline-item"><span class="time-badge">12:00 PM</span> Lunch with ocean views at 3 Mermaids Cafe & Restaurant.</div>
+            <div class="timeline-item"><span class="time-badge">02:00 PM</span> Hotel rest block, beach relax, or pool time.</div>
+            <div class="timeline-item"><span class="time-badge">06:30 PM</span> Fresh seafood dinner at Pupen Seafood or Jomtien Night Market.</div>
+
+            <h3>Sunday, Jan 24 – Return to Bangkok (Vince Hotel Pratunam Check-In), Shopping & Relaxation</h3>
+            <div class="timeline-item"><span class="time-badge">10:30 AM</span> Jomtien Palm Beach Hotel → Vince Hotel Bangkok Pratunam | <em>Method:</em> Private 13-Seater Van Charter | <em>Transit Time:</em> ~2 hours 15 mins via Highway 7</div>
+            <div class="timeline-item"><span class="time-badge">01:00 PM</span> Arrive in Bangkok, check back into <strong>Vince Hotel Bangkok Pratunam</strong>, drop bags, and enjoy lunch at nearby Pratunam eateries.</div>
+            <div class="timeline-item"><span class="time-badge">02:30 PM – 05:30 PM</span> Mid-day rest block at Vince Hotel, pool time, or light shopping walk to Platinum Fashion Mall / Pratunam Market.</div>
+            <div class="timeline-item"><span class="time-badge">06:00 PM</span> Casual family dinner near Pratunam / Siam Paragon Food Hall and final packing.</div>
+
+            <h3>Monday, Jan 25 – Departure from Vince Hotel to BKK Airport</h3>
+            <div class="note-box">
+                ⚠️ <em>Flight Booking Requirement: ALL return flights MUST depart from Suvarnabhumi Airport (BKK) and MUST be scheduled to leave between 04:00 PM and 07:00 PM.</em>
+            </div>
+            <div class="timeline-item"><span class="time-badge">11:30 AM</span> Leisurely breakfast at Vince Hotel and final check-out.</div>
+            <div class="timeline-item"><span class="time-badge">12:30 PM</span> [Point A to B] Vince Hotel Bangkok Pratunam → Suvarnabhumi Airport (BKK) | <em>Method:</em> Private 13-Seater Van Charter | <em>Transit Time:</em> ~45 minutes via Sirat Expressway</div>
+            <div class="timeline-item"><span class="time-badge">01:15 PM</span> Arrive at BKK Airport terminal for flight check-in, priority fast-track wheelchair/family immigration clearance, and duty-free shopping.</div>
+            <div class="timeline-item"><span class="time-badge">Departure:</span> Direct transfer to boarding gates for return flights departing between 04:00 PM and 07:00 PM.</div>
+        </div>
+
+        <!-- PACKING LIST (ENGLISH) -->
+        <div class="card" id="packing-section-en">
+            <h2>🧳 Family Packing Checklist (10 Travelers)</h2>
+            <p><em>Essential checklist categorized by group needs for Bangkok & Beach destinations.</em></p>
+
+            <div class="table-responsive">
+                <table>
+                    <tr>
+                        <th><strong>📄 Travel Documents & Money:</strong></th>
+                        <td>
+                            • Passports (valid at least 6 months) & e-Visas/entry forms<br>
+                            • Flight tickets & Hotel booking printouts / PDFs<br>
+                            • Cash (Thai Baht) for local markets + Credit/Debit Cards<br>
+                            • Travel Insurance policies & emergency contacts
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>👶 Kids & Baby (Eleanor & Thalia):</strong></th>
+                        <td>
+                            • Compact folding lightweight stroller & baby carrier harness<br>
+                            • Baby formula, bottles, bottle brush, and baby snacks<br>
+                            • Diapers, swim diapers, baby wipes, and changing mats<br>
+                            • Kids' swimwear, floaties, sun hats, and sound-canceling headphones
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>♿ Senior Essentials (Wheelchair Access):</strong></th>
+                        <td>
+                            • Folding lightweight wheelchair with seat cushion<br>
+                            • Daily prescription medications & doctor notes in carry-on<br>
+                            • Comfortable, supportive walking shoes<br>
+                            • Portable fan / cooling towels for warm afternoon tours
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>👗 Clothing & Temple Attire:</strong></th>
+                        <td>
+                            • Light, breathable cotton/linen clothes for tropical weather<br>
+                            • Modest temple attire (shoulders and knees covered for Wat Arun & Grand Palace)<br>
+                            • Swimwear & cover-ups for Koh Larn and Pattaya beaches<br>
+                            • Light jacket/cardigan for air-conditioned vans and airports
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>💊 Health, Toiletries & Electronics:</strong></th>
+                        <td>
+                            • First-aid kit (motion sickness pills, band-aids, rehydration salts, fever med)<br>
+                            • Reef-safe sunscreen (SPF 50+) & mosquito repellent spray<br>
+                            • Power banks, phone chargers, and Thailand plug adapters (Type A/C/G)<br>
+                            • Reusable water bottles & wet wipes for street food stops
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- EMERGENCY CONTACT LIST (ENGLISH) -->
+        <div class="card" id="emergency-section-en">
+            <h2>🚨 Thailand Emergency Contact List</h2>
+            <p><em>Key emergency hotlines, medical facilities, and diplomatic embassy contacts in Thailand:</em></p>
+
+            <div class="table-responsive">
+                <table>
+                    <tr>
+                        <th><strong>🚓 Police & Tourist Assistance:</strong></th>
+                        <td>
+                            • <strong>Tourist Police Hotline (English/Multilingual):</strong> 1155 (24/7 Toll-Free)<br>
+                            • <strong>General Police Emergency Hotline:</strong> 191<br>
+                            • <strong>Fire & Rescue Services:</strong> 199
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>🚑 Medical Emergency & Hospitals:</strong></th>
+                        <td>
+                            • <strong>National Medical Emergency / Ambulance Hotline:</strong> 1669<br>
+                            • <strong>Bumrungrad International Hospital (Bangkok):</strong> +66 2 066 8888 (33 Sukhumvit Soi 3)<br>
+                            • <strong>Bangkok Hospital Pratunam Area Branch:</strong> +66 2 310 3000<br>
+                            • <strong>Bangkok Hospital Pattaya (Pattaya Base):</strong> +66 38 259 999 (301 Moo 6 Sukhumvit Rd)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>🇺🇸 U.S. Embassy (Bangkok):</strong></th>
+                        <td>
+                            • <strong>Address:</strong> 95 Wireless Road, Lumpini, Pathumwan, Bangkok 10330<br>
+                            • <strong>Phone (24/7 Emergency Assistance):</strong> +66 2 205 4000 (Local: 02 205 4000)<br>
+                            • <strong>Consular Services Email:</strong> ACSBKK@state.gov
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>🇵🇭 Embassy of the Philippines (Bangkok):</strong></th>
+                        <td>
+                            • <strong>Address:</strong> 760 Sukhumvit Road, Soi 30/1, Khlong Toei, Bangkok 10110<br>
+                            • <strong>Phone (General Line):</strong> +66 2 259 0139 / +66 2 258 5401<br>
+                            • <strong>24/7 Emergency Hotline:</strong> +66 81 827 4103 / +66 81 868 8312
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>🇲🇲 Embassy of Myanmar (Bangkok):</strong></th>
+                        <td>
+                            • <strong>Address:</strong> 132 Sathorn Nua Road, Silom, Bangrak, Bangkok 10500<br>
+                            • <strong>Phone (General Line):</strong> +66 2 233 2237 / +66 2 234 4698<br>
+                            • <strong>Consular Office Phone:</strong> +66 2 233 7250
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- FLIGHT INFORMATION (ENGLISH) -->
+        <div class="card" id="flight-section-en">
+            <h2>✈️ Flight Information</h2>
+            <p><em>Detailed flight schedules and booking references for all group travelers:</em></p>
+            <div class="note-box">
+                ℹ️ <em>Flight details and itinerary reference numbers will be added here once bookings are finalized.</em>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== BURMESE CONTENT (မြန်မာ) ==================== -->
+    <div id="lang-mm" class="lang-content">
+        <header>
+            <h1>🎉 မိသားစုခရီးစဉ် ဖိတ်ကြားလွှာ: Thailand Family Trip 2027</h1>
+            <p><em><strong>Zaw's Family ထိုင်းနိုင်ငံခရီးစဉ်</strong> တွင် ပါဝင်ရန် ဖိတ်ခေါ်ပါသည်။ ခရီးစဉ်ရက်စွဲ: <strong>၂၀၂၇ ဇန်နဝါရီ ၁၆ မှ ဇန်နဝါရီ ၂၅ အထိ</strong>!</em></p>
+        </header>
+
+        <!-- SECTION NAVIGATION LINKS (BURMESE VIEW) -->
+        <div class="section-nav-bar">
+            <a href="#packing-section-mm" class="lang-btn">🧳 PackingList</a>
+            <a href="#emergency-section-mm" class="lang-btn">🚨 Emergency Contacts</a>
+            <a href="#flight-section-mm" class="lang-btn">✈️ Flight Information</a>
+        </div>
+
+        <div class="card">
+            <h2>ထိုင်းနိုင်ငံ မိသားစုစုံလင်ခရီးစဉ် အသေးစိတ်</h2>
+            <p><em>ဘန်ကောက်၊ ကော့လန်းကျွန်း နှင့် ပတ္တယား ခရီးစဉ် | သွားလာရေး၊ ကမ်းခြေဟိုတယ် နှင့် စားသောက်ဆိုင်များ အပြည့်အစုံ</em></p>
+            
+            <div class="table-responsive">
+                <table>
+                    <tr>
+                        <th><strong>မိသားစုအဖွဲ့ဝင်များ:</strong></th>
+                        <td>စုစုပေါင်း ၁၀ ဦး (လူကြီး ၈ ဦး၊ သက်ကြီးရွယ်အို ၁ ဦး [ခေါက်ဘီးတပ်ကုလားထိုင်ပါ]၊ ကကလေး ၂ ဦး [၄ နှစ် နှင့် ၇ လ])</td>
+                    </tr>
+                    <tr>
+                        <th><strong>တည်းခိုမည့်ဟိုတယ်များ:</strong></th>
+                        <td>
+                            • <strong>ဘန်ကောက် (အဓိက):</strong> Vince Hotel Bangkok Pratunam (ညဉ့်နက် ဆန်ပြုတ်အခမဲ့ ပါဝင်သည်)<br>
+                            • <strong>ကော့လန်းကျွန်း:</strong> The Sky & Sea Resort Beach Club (၂ ညအိပ်: ဇန်နဝါရီ ၂၀ နှင့် ၂၁)<br>
+                            • <strong>ပတ္တယား:</strong> Jomtien Palm Beach Hotel & Resort (သို့မဟုတ် Avalon Beach Resort) (၂ ညအိပ်: ဇန်နဝါရီ ၂၂ နှင့် ၂၃)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>သွားလာရေးအစီအစဉ်:</strong></th>
+                        <td>
+                            • <strong>မြို့တွင်းသွားလာရေး:</strong> 2x GrabXL / Bolt XL ကားများ (ဘီးတပ်ကုလားထိုင် နှင့် ကကလေးတွန်းလှည်းများ ဆံ့သည်)<br>
+                            • <strong>မြို့ပြင်ခရီးစဉ်:</strong> ၁၃ ယောက်စီး သီးသန့်ဗန်ကား (ဘန်ကောက် ↔ ပတ္တယား ↔ BKK လေဆိပ်)<br>
+                            • <strong>ရေကြောင်းသွားလာရေး:</strong> Chao Phraya Tourist Blue Boat (ဘန်ကောက် မြစ်ကြောင်းရှုခင်း) နှင့် ဖယ်ရီသင်္ဘော/စပိဘုတ် (ပတ္တယား ↔ ကော့လန်း)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- NEARBY ATTRACTIONS NEAR VINCE HOTEL (BURMESE) -->
+        <div class="card">
+            <h2>📍 Vince Hotel Pratunam အနီးရှိ လည်ပတ်စရာများနှင့် ဈေးဝယ်စင်တာများ</h2>
+            <p><em>Vince Hotel မှ လမ်းလျှောက်ချိန် နှင့် ကားမောင်းချိန် အကွာအဝေးများ:</em></p>
+            
+            <div class="attraction-grid">
+                <div class="attraction-card">
+                    <h4>🛍️ Platinum Fashion Mall (ပလက်တီနမ်)</h4>
+                    <p><strong>အကွာအဝေး:</strong> ~၇၅၀ မီတာ</p>
+                    <p><strong>လမ်းလျှောက်ချိန်:</strong> ~၁၀ မိနစ် (ညီညာသောလမ်း)</p>
+                    <p><strong>ကားမောင်းချိန်:</strong> ~၅ မိနစ် (Grab / တက္ကစီ)</p>
+                    <p><small>အဝတ်အထည်၊ ဓါတ်ပုံရိုက်စရာများနှင့် မုန့်များ စျေးသက်သာစွာ ဝယ်ယူနိုင်သော အဲကွန်းပါ လက်ကားစင်တာ။</small></p>
+                </div>
+
+                <div class="attraction-card">
+                    <h4>🥢 ပရာတူနမ်ဈေး နှင့် မြန်မာထမင်းဆိုင်များ</h4>
+                    <p><strong>အကွာအဝေး:</strong> ~၂၀၀ မှ ၅၀၀ မီတာ</p>
+                    <p><strong>လမ်းလျှောက်ချိန်:</strong> ~၂ မှ ၅ မိနစ်</p>
+                    <p><strong>ကားမောင်းချိန်:</strong> ~၂ မိနစ်</p>
+                    <p><small>Phetchaburi Soi 15 ရှိ မန္တလေးထမင်းဆိုင်၊ သူကြီးသား၊ ယိုယိုလေး နှင့် ကလျာဏ မြန်မာစားသောက်ဆိုင်များ။</small></p>
+                </div>
+
+                <div class="attraction-card">
+                    <h4>🏙️ Baiyoke Tower II ရှုခင်းကြည့်စင်</h4>
+                    <p><strong>အကွာအဝေး:</strong> ~၈၅၀ မီတာ</p>
+                    <p><strong>လမ်းလျှောက်ချိန်:</strong> ~၁၂ မိနစ်</p>
+                    <p><strong>ကားမောင်းချိန်:</strong> ~၆ မိနစ်</p>
+                    <p><small>၈၄ လွှာရှိ လှည့်ပတ်ကြည့်ရှုနိုင်သော စင်မြင့်မှ ဘန်ကောက်မြို့၏ ၃၆၀ ဒီဂရီ ရှုခင်း။</small></p>
+                </div>
+
+                <div class="attraction-card">
+                    <h4>🏬 Siam Paragon, Siam Center & SEA LIFE ရေအောက်ပြတိုက်</h4>
+                    <p><strong>အကွာအဝေး:</strong> ~၁.၂ ကီလိုမီတာ</p>
+                    <p><strong>လမ်းလျှောက်ချိန်:</strong> ~၁၅ မှ ၁၈ မိနစ် (BTS စကာင်းဝေါ့ခ်မှ လျှောက်နိုင်သည်)</p>
+                    <p><strong>ကားမောင်းချိန်:</strong> ~၇ မှ ၁၀ မိနစ်</p>
+                    <p><small>ကမ္ဘာ့အဆင့်မီ စားသောက်ဆိုင်များ၊ ကကလေးများအတွက် SEA LIFE ရေအောက်ပြတိုက် နှင့် စhopping mall။</small></p>
+                </div>
+
+                <div class="attraction-card">
+                    <h4>🛍️ CentralWorld & Trimurti နတ်နန်း</h4>
+                    <p><strong>အကွာအဝေး:</strong> ~၁.၃ ကီလိုမီတာ</p>
+                    <p><strong>လမ်းလျှောက်ချိန်:</strong> ~၁၆ မှ ၁၈ မိနစ်</p>
+                    <p><strong>ကားမောင်းချိန်:</strong> ~၈ မှ ၁၀ မိနစ်</p>
+                    <p><small>ကကလေးကစားကွင်းများ၊ အစားအသောက်တန်းများနှင့် ကျယ်ဝန်းသော ဈေးဝယ်စင်တာကြီး။</small></p>
+                </div>
+
+                <div class="attraction-card">
+                    <h4>🙏 အီရာဝမ် ကြက်လျှာစွန်း မဟာဗြဟ္မာနတ်နန်း (Erawan Shrine)</h4>
+                    <p><strong>အကွာအဝေး:</strong> ~၁.၅ ကီလိုမီတာ</p>
+                    <p><strong>လမ်းလျှောက်ချိန်:</strong> ~၁၈ မှ ၂၀ မိနစ်</p>
+                    <p><strong>ကားမောင်းချိန်:</strong> ~၈ မှ ၁၂ မိနစ်</p>
+                    <p><small>ထိုင်းရိုးရာ အကအလှများနှင့် ဆုတောင်းပြည့် မဟာဗြဟ္မာနတ်နန်း။</small></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAILY ITINERARY (BURMESE) -->
+        <div class="card">
+            <h2>🕒 နေ့စဉ်ခရီးစဉ် အသေးစိတ်ဇယား</h2>
+
+            <div class="note-box">
+                ℹ️ <strong>မှတ်ချက်:</strong> ဤခရီးစဉ်နှင့် အချိန်ဇယားများသည် ယာဉ်ကြောပိတ်ဆို့မှု၊ လူစည်ကားမှုနှင့် ကကလေးများ၏ အခြေအနေပေါ်မူတည်၍ ပြောင်းလဲနိုင်ပါသည်။
+            </div>
+
+            <h3>ကြာသပတေး၊ ဇန်နဝါရီ ၁၄ – အမေရိကန်မှ စတင်ထွက်ခွာခြင်း</h3>
+            <p><em>📌 လေယာဉ်မှတ်ချက်: အမေရိကန်မှ လာရောက်မည့်သူများအတွက်သာ – ခရီးစဉ်ကြာချိန် စုစုပေါင်း ၂၁ နာရီခန့်။</em></p>
+            <div class="timeline-item">
+                <strong>လေယာဉ်ပေါ်တွင်:</strong> အမေရိကန်မှ ထိုင်းနိုင်ငံ ဘန်ကောက်သို့ စတင်ထွက်ခွာခြင်း။
+            </div>
+
+            <h3>သောကြာ၊ ဇန်နဝါရီ ၁၅ – ခရီးစဉ်အတွင်း</h3>
+            <div class="timeline-item">
+                <strong>လေယာဉ်ပေါ်တွင်:</strong> ဘန်ကောက်သို့ လေယာဉ်ဆက်လက်စီးနင်းခြင်း။
+            </div>
+
+            <h3>စနေ၊ ဇန်နဝါရီ ၁၆ – ဘန်ကောက်ရောက်ရှိခြင်း၊ Vince Hotel Check-In၊ မြန်မာ/ထိုင်းစာ ညစာ နှင့် ညဈေးလည်ပတ်ခြင်း</h3>
+            <div class="note-box">
+                📌 <em>ဒေသတွင်းလေယာဉ် မှတ်ချက်: မြန်မာ နှင့် ဖိလစ်ပိုင်မှ လာရောက်မည့်သူများသည် အမေရိကန်အဖွဲ့နှင့် တစ်ရက်တည်း ရောက်ရှိရန် ဇန်နဝါရီ ၁၆ တွင် ထွက်ခွာရမည်။</em><br>
+                ⚠️ <em>လေယာဉ်စီးနင်းမှု လိုအပ်ချက်: ရောက်ရှိမည့် လေယာဉ်များအားလုံး Suvarnabhumi Airport (BKK) သို့ မွန်းလွဲ ၁၂:၀၀ မှ ညနေ ၆:၀၀ အတွင်း ရောက်ရှိရန် ဘွတ်ကင်လုပ်ရမည်။</em>
+            </div>
+            <div class="timeline-item"><span class="time-badge">သွားလာရေး:</span> BKK လေဆိပ် → Vince Hotel Bangkok Pratunam | <em>နည်းလမ်း:</em> သီးသန့် ၁၃ ယောက်စီး ဗန်ကား | <em>ကြာချိန်:</em> ~၄၅ မိနစ်</div>
+            <div class="timeline-item"><span class="time-badge">Check-In:</span> BKK လေဆိပ်သို့ ရောက်ရှိပြီး သီးသန့်ဗန်ကားဖြင့် Vince Hotel သို့သွားရောက်ကာ Check-in ဝင်၍ အနားယူမည်။</div>
+            <div class="timeline-item"><span class="time-badge">ညနေပိုင်း ညစာ:</span> Hotel မှ ၂ မိနစ်ခန့် လမ်းလျှောက်၍ Pratunam မြန်မာတန်း (Phetchaburi Soi 15) တွင် မိသားစုညစာစားခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">ညဈေးလည်ပတ်ခြင်း:</span> ညစာစားပြီးနောက် နာမည်ကြီး Chatuchak စတုစက်ညဈေး သို့မဟုတ် Jodd Fairs ညဈေးသို့ သွားရောက်လည်ပတ်ခြင်း:
+                <ul style="margin: 5px 0 0 15px; padding: 0;">
+                    <li><strong>Chatuchak Weekend Market (စတုစက်ညဈေး):</strong> Vince Hotel → Chatuchak Market | <em>နည်းလမ်း:</em> 2x GrabXL / Bolt XL | <em>ကြာချိန်:</em> ~၂၀–၂၅ မိနစ်</li>
+                    <li><strong>Jodd Fairs Night Market:</strong> Vince Hotel → Jodd Fairs | <em>နည်းလမ်း:</em> 2x GrabXL / Bolt XL | <em>ကြာချိန်:</em> ~၁၅–၂၀ မိနစ်</li>
+                </ul>
+            </div>
+            <div class="timeline-item"><span class="time-badge">ညပိုင်း အစီအစဉ်:</span> Vince Hotel တွင် ညဉ့်နက် အခမဲ့ ဆန်ပြုတ် (Khao Tom) သောက်သုံးနိုင်ပါသည် (9:00 PM – 11:00 PM)။</div>
+
+            <h3>တနင်္ဂနွေ၊ ဇန်နဝါရီ ၁၇ – Wat Arun၊ Big Buddha (Wat Paknam)၊ Hidden Bangkok Bistro၊ ICONSIAM နှင့် Wat Arun ညရှုခင်း</h3>
+            <div class="timeline-item"><span class="time-badge">07:45 AM</span> Vince Hotel Pratunam → Wat Arun (2x GrabXL / Bolt XL | ~၂၅–၃၀ မိနစ်)</div>
+            <div class="timeline-item"><span class="time-badge">08:15 AM</span> Wat Arun (အရုဏ်ဦးဘုရား) ဝင်းအတွင်း လှည့်ပတ်ကြည့်ရှုခြင်း (၂ နာရီ)။</div>
+            <div class="timeline-item"><span class="time-badge">10:15 AM</span> Wat Arun → Big Buddha (Wat Paknam Phasi Charoen) ရွှေဆင်းတုတော်ကြီး သို့ ထွက်ခွာခြင်း (2x GrabXL / Bolt XL | ~၁၅–၂၀ မိနစ်)။</div>
+            <div class="timeline-item"><span class="time-badge">10:35 AM</span> Big Buddha (Wat Paknam) ဘုရားဝင်းအတွင်း ဖူးမြော်ကြည်ညိုခြင်း နှင့် ဆုတောင်းခြင်း (၁ နာရီ)။</div>
+            <div class="timeline-item"><span class="time-badge">11:35 AM</span> Big Buddha (Wat Paknam) → Hidden Bangkok Bistro (2x GrabXL / Bolt XL | ~၁၀–၁၅ မိနစ်) သို့ သွားရောက်၍ မြစ်ကမ်းဘေး ဘုရားရှုခင်းကြည့်ရင်း နေ့လည်စာစားခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">12:30 PM</span> Vince Hotel သို့ပြန်လည်ရောက်ရှိပြီး မွန်းလွဲပိုင်း အနားယူခြင်း (1:00 PM – 4:30 PM)။</div>
+            <div class="timeline-item"><span class="time-badge">04:30 PM</span> Vince Hotel → ICONSIAM (2x GrabXL | ~၃၀ မိနစ်) တွင် ညစာစားခြင်း နှင့် ရေပန်းရှိုးကြည့်ရှုခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">07:15 PM</span> ICONSIAM သင်္ဘောဆိပ် → Tha Tien သင်္ဘောဆိပ် (Chao Phraya Tourist Blue Boat | ~၂၀ မိနစ် စီးနင်းခြင်း)။</div>
+            <div class="timeline-item"><span class="time-badge">07:50 PM</span> Tha Tien ကမ်းနားလမ်းတွင် လမ်းလျှောက်ရင်း မြစ်တစ်ဖက်ကမ်းရှိ မီးထိန်ထိန်လင်းနေသော Wat Arun ရှုခင်းအား ကြည့်ရှုခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">08:30 PM</span> Tha Tien Pier → Vince Hotel Pratunam (2x GrabXL | ~၂၀ မိနစ်)။</div>
+
+            <h3>တနင်္လာ၊ ဇန်နဝါရီ ၁၈ – Wat Phra Kaew၊ နန်းတော်၊ Wat Pho နှင့် Asiatique The Riverfront</h3>
+            <div class="timeline-item"><span class="time-badge">08:00 AM</span> Vince Hotel → နန်းတော် နှင့် Wat Phra Kaew (2x GrabXL | ~၂၅ မိနစ်)။</div>
+            <div class="timeline-item"><span class="time-badge">08:30 AM</span> မြဆင်းတုတော်၊ နန်းတော် နှင့် Wat Pho လျောင်းတော်မူဘုရား လှည့်ပတ်ဖူးမြော်ခြင်း (၂.၅ နာရီ)။</div>
+            <div class="timeline-item"><span class="time-badge">11:00 AM</span> Tha Tien အနီးရှိ ဆိုင်များတွင် နေ့လည်စာစားခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">12:30 PM</span> Vince Hotel သို့ပြန်၍ မွန်းလွဲပိုင်း အနားယူခြင်း (1:00 PM – 5:00 PM)။</div>
+            <div class="timeline-item"><span class="time-badge">05:00 PM</span> Pratunam ရှိ မြန်မာထမင်းဆိုင်များ (ယိုယိုလေး / ကလျာဏ) တွင် စောစီးစွာ ညစာစားခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">06:30 PM</span> Vince Hotel → Asiatique The Riverfront (2x GrabXL | ~၃၀ မိနစ်) သို့ သွားရောက်၍ ညဈေးလမ်းလျှောက်ခြင်း၊ ဈေးဝယ်ခြင်း နှင့် မြစ်ကမ်းဘေး အပန်းဖြေခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">09:00 PM</span> Vince Hotel Pratunam သို့ ပြန်လည်ရောက်ရှိခြင်း (2x GrabXL | ~၃၀ မိနစ်)။</div>
+
+            <h3>အင်္ဂါ၊ ဇန်နဝါရီ ၁၉ – ဘုရားဖူးခရီးစဉ်၊ Siam Paragon နှင့် Erawan Shrine ညပိုင်းဆုတောင်းခြင်း</h3>
+            <div class="note-box">
+                🧺 <strong>အဝတ်လျှော် မှတ်ချက်:</strong> နံနက်ပိုင်းတွင် အဝတ်များကို လျှော်ရန် ပို့ထားမည်ဖြစ်ပြီး ကော့လန်းကျွန်း သို့ မထွက်ခွာမီ ညဉ့်နက်ပိုင်း သို့မဟုတ် နောက်တစ်နေ့ နံနက်ပိုင်းတွင် ပြန်လည်သိမ်းဆည်းပါမည် — သို့မှသာ မိသားစုဝင်တိုင်း ကော့လန်းကျွန်း နှင့် ပတ္တယား ၄ ရက်တာ ခရီးစဉ်အတွက် သန့်ရှင်းခေါက်သိမ်းထားသော အဝတ်အထည်များ သုံးဆောင်နိုင်မည် ဖြစ်ပါသည်။
+            </div>
+            <div class="timeline-item"><span class="time-badge">08:30 AM</span> Vince Hotel → Wat Ratchanatdaram (Loha Prasat) (2x GrabXL | ~၂၀ မိနစ်)။</div>
+            <div class="timeline-item"><span class="time-badge">09:45 AM</span> Visit Wat Suthat Thepwararam နှင့် Giant Swing (ကြက်လျှာစွန်း တိုင်နီကြီး) သို့ သွားရောက်ခြင်း (၅ မိနစ် လမ်းလျှောက်/ဘီးတပ်ကုလားထိုင်)။</div>
+            <div class="timeline-item"><span class="time-badge">11:00 AM</span> Visit Wat Traimit (ရွှေဆင်းတုတော်ကြီး) သို့ သွားရောက်ခြင်း (2x GrabXL | ~၁၂ မိနစ်)။</div>
+            <div class="timeline-item"><span class="time-badge">12:15 PM</span> Siam Paragon Food Hall တွင် နေ့လည်စာစားပြီး မွန်းလွဲပိုင်း အနားယူခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">06:00 PM</span> Erawan Shrine (ကြက်လျှာစွန်း မဟာဗြဟ္မာနတ်နန်း) သို့ သွားရောက်၍ ညပိုင်း ဆုတောင်းပွဲ နှင့် ထိုင်းရိုးရာ အကအလှများကို ကြည့်ရှုဖူးမြော်ခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">07:30 PM</span> Vince Hotel သို့ ပြန်လည်ရောက်ရှိခြင်း သို့မဟုတ် CentralWorld အနီးဝန်းကျင်အား လှည့်ပတ်ကြည့်ရှုခြင်း။</div>
+
+            <div class="note-box">
+                💡 <strong>ခရီးဆောင်အိတ် အကြံပြုချက်:</strong> ၄ ရက်အကြာတွင် Vince Hotel Bangkok Pratunam သို့ ပြန်လည်ရောက်ရှိမည်ဖြစ်သဖြင့် ကော့လန်းကျွန်း နှင့် ပတ္တယားသို့ သွားရောက်စဉ် အိတ်ကြီးများ သယ်ဆောင်ရန် မလိုဘဲ အဝတ်အစားများကို ခရီးဆောင်အိတ် တစ်လုံး သို့မဟုတ် ကျောပိုးအိတ်များတွင် စုစည်းထည့်သွင်း၍ ကျန်အိတ်ကြီးများကို Vince Hotel တွင် အပ်နှံထားခဲ့ရန် အကြံပြုပါသည်။ (မိသားစုဝင်တစ်ဦးစီ၏ ဆန္ဒအပေါ် မူတည်ပါသည်)။
+            </div>
+
+            <h3>ဗုဒ္ဓဟူး၊ ဇန်နဝါရီ ၂၀ – ကော့လန်းကျွန်းသို့ ထွက်ခွာခြင်း နှင့် Sky & Sea Resort Check-In (ည ၁)</h3>
+            <div class="timeline-item"><span class="time-badge">10:00 AM</span> Vince Hotel Bangkok → Bali Hai Pier (ပတ္တယား) (သီးသန့် ၁၃ ယောက်စီး ဗန်ကား | ~၂ နာရီ ၁၅ မိနစ်)။</div>
+            <div class="timeline-item"><span class="time-badge">12:30 PM</span> Bali Hai Pier သို့ရောက်ရှိပြီး အနီးနားတွင် နေ့လည်စာစားခြင်း သို့မဟုတ် မုန့်များဝယ်ယူခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">01:15 PM</span> Bali Hai Pier → ကော့လန်းကျွန်း (Na Baan Pier) သို့ ဖယ်ရီသင်္ဘော / စပိဘုတ်ဖြင့် သွားရောက်ခြင်း (~၂၀–၄၅ မိနစ်)။</div>
+            <div class="timeline-item"><span class="time-badge">02:00 PM</span> <strong>The Sky & Sea Resort Beach Club</strong> တွင် Check-in ဝင်ခြင်း (Check-in အချိန် မွန်းလွဲ ၂:၀၀ နာရီခန့်)။</div>
+            <div class="timeline-item"><span class="time-badge">03:00 PM</span> Tien Beach သို့မဟုတ် Samae Beach တွင် မွန်းလွဲပိုင်း ရေကူးခြင်း နှင့် အနားယူခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">06:00 PM</span> Krua Samae Beach စားသောက်ဆိုင်တွင် နေဝင်ချိန်ကြည့်ရင်း ပင်လယ်စာ ညစာစားခြင်း။</div>
+
+            <h3>ကြာသပတေး၊ ဇန်နဝါရီ ၂၁ – ကော့လန်းကျွန်း ရေကူးခြင်း နှင့် ကျွန်းပေါ်ညစာ (ည ၂)</h3>
+            <div class="timeline-item"><span class="time-badge">09:45 AM</span> Tien Beach (ဘီးတပ်ကုလားထိုင် သွားလာရလွယ်ကူသော ကမ်းခြေ) တွင် နံနက်ပိုင်း ရေကူးခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">12:30 PM</span> Indigo Cafe သို့မဟုတ် Fat Submarine Cafe တွင် နေ့လည်စာစားခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">02:30 PM</span> The Sky & Sea Resort တွင် မွန်းလွဲပိုင်း အခန်းတွင်း ကကလေးများနှင့် လူကြီးများ အနားယူချိန်။</div>
+            <div class="timeline-item"><span class="time-badge">06:00 PM</span> Pookai Cafe သို့မဟုတ် Na Baan Pier အနီးရှိ ဈေးတန်းတွင် မိသားစုညစာစားခြင်း။</div>
+
+            <h3>သောကြာ၊ ဇန်နဝါရီ ၂၂ – ပတ္တယားသို့ ပြန်လည်ထွက်ခွာခြင်း၊ Jomtien ဟိုတယ် Check-In၊ Sanctuary of Truth နှင့် DAM Pattaya မီးရှိုးပွဲ (ည ၁)</h3>
+            <div class="timeline-item"><span class="time-badge">09:30 AM</span> The Sky & Sea Resort → Na Baan Pier | <em>နည်းလမ်း:</em> Resort Shuttle | <em>ကြာချိန်:</em> ၅ မိနစ်</div>
+            <div class="timeline-item"><span class="time-badge">10:00 AM</span> Na Baan Pier (ကော့လန်းကျွန်း) → Bali Hai Pier (ပတ္တယား) | <em>နည်းလမ်း:</em> စပိဘုတ် / ဖယ်ရီ | <em>ကြာချိန်:</em> ~၂၀–၄၅ မိနစ်</div>
+            <div class="timeline-item"><span class="time-badge">10:45 AM</span> Bali Hai Pier → Jomtien Palm Beach Hotel & Resort (2x GrabXL | ~၁၅ မိနစ်)။ Check-in ဝင်ခြင်း / အထုပ်အပိုးများထားခြင်း နှင့် Dongtan ကမ်းခြေလမ်းတွင် နေ့လည်စာစားခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">01:30 PM</span> အနားယူခြင်း၊ ရေကူးကန်ဆင်းခြင်း သို့မဟုတ် Dongtan ကမ်းခြေလမ်းတစ်လျှောက် လမ်းလျှောက်ခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">03:30 PM</span> Sanctuary of Truth (သစ်သားရုပ်တုပြတိုက်ကြီး) သို့ သွားရောက်ကြည့်ရှုခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">06:30 PM</span> Hotel → DAM Pattaya သို့သွားရောက်၍ ညစာစားခြင်း နှင့် ကမ်းခြေမီးရှိုးပွဲ ကြည့်ရှုခြင်း။</div>
+
+            <h3>စနေ၊ ဇန်နဝါရီ ၂၃ – Big Buddha Hill၊ ကျောက်တောင်ရုပ်ပွားတော် နှင့် 3 Mermaids Cafe (ည ၂)</h3>
+            <div class="timeline-item"><span class="time-badge">08:30 AM</span> Big Buddha Hill နှင့် Khao Chi Chan ကျောက်တောင်ရုပ်ပွားတော် သို့ သွားရောက်ခြင်း (2x GrabXL | ~၁၅–၂၅ မိနစ်)။</div>
+            <div class="timeline-item"><span class="time-badge">12:00 PM</span> 3 Mermaids Cafe တွင် ပင်လယ်ရှုခင်းကြည့်ရင်း နေ့လည်စာစားခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">02:00 PM</span> ဟိုတယ်တွင် ခဏအနားယူခြင်း သို့မဟုတ် ကမ်းခြေ/ရေကူးကန်ဆင်းခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">06:30 PM</span> Pupen Seafood သို့မဟုတ် Jomtien ညဈေးတွင် ပင်လယ်စာ ညစာစားခြင်း။</div>
+
+            <h3>တနင်္ဂနွေ၊ ဇန်နဝါရီ ၂၄ – ဘန်ကောက်သို့ ပြန်လည်ထွက်ခွာခြင်း (Vince Hotel Check-In)၊ ဈေးဝယ်ခြင်း နှင့် အနားယူခြင်း</h3>
+            <div class="timeline-item"><span class="time-badge">10:30 AM</span> Jomtien Palm Beach Hotel → Vince Hotel Bangkok Pratunam | <em>နည်းလမ်း:</em> သီးသန့် ၁၃ ယောက်စီး ဗန်ကား | <em>ကြာချိန်:</em> ~၂ နာရီ ၁၅ မိနစ်</div>
+            <div class="timeline-item"><span class="time-badge">01:00 PM</span> ဘန်ကောက်သို့ ရောက်ရှိပြီး <strong>Vince Hotel Bangkok Pratunam</strong> သို့ ပြန်လည် Check-in ဝင်ကာ အနီးရှိ Pratunam ဆိုင်များတွင် နေ့လည်စာစားခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">02:30 PM – 05:30 PM</span> Vince Hotel တွင် မွန်းလွဲပိုင်း အနားယူခြင်း သို့မဟုတ် Platinum Mall / Pratunam ဈေးသို့ လမ်းလျှောက်၍ ဈေးဝယ်ခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">06:00 PM</span> Pratunam / Siam Paragon Food Hall အနီးတွင် မိသားစု ညစာစားခြင်း နှင့် ခရီးဆောင်အိတ်များ သိမ်းဆည်းခြင်း။</div>
+
+            <h3>တနင်္လာ၊ ဇန်နဝါရီ ၂၅ – Vince Hotel မှ BKK လေဆိပ်သို့ ထွက်ခွာခြင်း</h3>
+            <div class="note-box">
+                ⚠️ <em>လေယာဉ်စီးနင်းမှု လိုအပ်ချက်: ပြန်လည်ထွက်ခွာမည့် လေယာဉ်များအားလုံး Suvarnabhumi Airport (BKK) မှသာ ဖြစ်ရမည်ဖြစ်ပြီး ညနေ ၄:၀၀ မှ ၇:၀၀ အတွင်း ထွက်ခွာရမည်။</em>
+            </div>
+            <div class="timeline-item"><span class="time-badge">11:30 AM</span> Vince Hotel တွင် နံနက်စာ သက်တောင့်သက်သာ စားသောက်ပြီး Check-out ထွက်ခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">12:30 PM</span> Vince Hotel Bangkok Pratunam → Suvarnabhumi Airport (BKK) | <em>နည်းလမ်း:</em> သီးသန့် ၁၃ ယောက်စီး ဗန်ကား | <em>ကြာချိန်:</em> ~၄၅ မိနစ်</div>
+            <div class="timeline-item"><span class="time-badge">01:15 PM</span> BKK လေဆိပ်သို့ ရောက်ရှိပြီး လေယာဉ် Check-in ဝင်ခြင်း၊ ဦးစားပေး လဝက စိစစ်ရေးဂိတ်မှ ဖြတ်သန်းခြင်း နှင့် ဈေးဝယ်ခြင်း။</div>
+            <div class="timeline-item"><span class="time-badge">ထွက်ခွာချိန်:</span> ညနေ ၄:၀၀ မှ ၇:၀၀ အတွင်း ထွက်ခွာမည့် လေယာဉ်များသို့ တိုက်ရိုက်သွားရောက် စီးနင်းခြင်း။</div>
+        </div>
+
+        <!-- PACKING LIST (BURMESE) -->
+        <div class="card" id="packing-section-mm">
+            <h2>🧳 မိသားစု ထုပ်ပိုးရမည့်ပစ္စည်းများ စာရင်း (၁၀ ဦး)</h2>
+            <p><em>ဘန်ကောက်နှင့် ကမ်းခြေခရီးစဉ်အတွက် လိုအပ်သော အရေးကြီးပစ္စည်းများ စာရင်း။</em></p>
+
+            <div class="table-responsive">
+                <table>
+                    <tr>
+                        <th><strong>📄 စာရွက်စာတမ်း နှင့် ငွေကြေး:</strong></th>
+                        <td>
+                            • နိုင်ငံကူးလက်မှတ် Passport (အနည်းဆုံး သက်တမ်း ၆ လကျန်) နှင့် ဗီဇာ/ဝင်ခွင့်ဖောင်များ<br>
+                            • လေယာဉ်လက်မှတ် နှင့် ဟိုတယ်ဘိုကင် စာရွက်များ/PDF<br>
+                            • ထိုင်းဘတ်ငွေသား (ဈေးတန်းများအတွက်) + ကရီးဒစ်/ဒက်ဘစ်ကတ်များ<br>
+                            • ခရီးသွားအာမခံ စာရွက်စာတမ်းများနှင့် အရေးပေါ်ဆက်သွယ်ရန်ဖုန်းနံပါတ်များ
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>👶 ကကလေးငယ်များအတွက် (Eleanor & Thalia):</strong></th>
+                        <td>
+                            • ခေါက်ရလွယ်ကူ ပေါ့ပါးသော ကကလေးတွန်းလှည်း Stroller နှင့် ကကလေးချီပဝါ Harness<br>
+                            • ကကလေးနို့မှုန့်၊ နို့ဗူး၊ နို့ဗူးဆေးတံ နှင့် ကကလေးမုန့်များ<br>
+                            • ကကလေးသေးခံ Diapers၊ ရေကူးသေးခံ၊ စိုစွတ်တစ်ရှူး Wet wipes နှင့် သန့်ရှင်းရေးအခင်းများ<br>
+                            • ကကလေးရေကူးဝတ်စုံ၊ ရေကူးကွင်း Floaties၊ နေကာဦးထုပ် နှင့် အသံဆူညံမှုသက်သာစေသော နားကြပ်
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>♿ သက်ကြီးရွယ်အိုများအတွက် (ဘီးတပ်ကုလားထိုင်):</strong></th>
+                        <td>
+                            • ခေါက်ရလွယ်ကူ ပေါ့ပါးသော ဘီးတပ်ကုလားထိုင် Folding Wheelchair နှင့် ထိုင်ခုံအဖုံး<br>
+                            • နေ့စဉ်သောက်သုံးနေသော ဆရာဝန်ညွှန်ကြားချက်ပါ ဆေးဝါးများ (လက်ဆွဲအိတ်တွင်ထည့်ရန်)<br>
+                            • သက်တောင့်သက်သာရှိပြီး လမ်းလျှောက်ရလွယ်ကူသော ဖိနပ်များ<br>
+                            • လက်တင်ပန်ကာ / အအေးဓာတ်ပေး ပဝါစိုများ
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>👗 အဝတ်အစား နှင့် ဘုရားဖူးဝတ်စုံ:</strong></th>
+                        <td>
+                            • ပူအိုက်စိုစွတ်သော ရာသီဥတုအတွက် ပေါ့ပါးအေးမြသော ဂွမ်း/ဂျင်း အင်္ကျီများ<br>
+                            • ဘုရားကျောင်းကန် (Wat Arun & Grand Palace) ဝင်ရန် သင့်တော်သော လုံခြုံသည့် အဝတ်အစားများ (ပခုံးနှင့် ဒူးဆစ်ဖုံးရမည်)<br>
+                            • ကော့လန်းကျွန်း နှင့် ပတ္တယား ကမ်းခြေသုံး ရေကူးဝတ်စုံများ<br>
+                            • လေအေးပေးစက်ပါ ကားများနှင့် လေဆိပ်အတွက် အပေါ်ထပ်အင်္ကျီပါး/ကုတ်အင်္ကျီ
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>💊 ကျန်းမာရေး၊ သန့်ရှင်းရေး နှင့် လျှပ်စစ်ပစ္စည်းများ:</strong></th>
+                        <td>
+                            • ရှေးဦးသူနာပြုဆေးသေတ္တာ (ကားမူးဆေး၊ ပလာစတာ၊ ဓာတ်ဆား၊ ဖျားနာပျောက်ဆေး)<br>
+                            • နေလောင်ကာခရမ် Sunscreen (SPF 50+) နှင့် ခြင်ပြေးစပရေး spray<br>
+                            • ပါဝါဘဏ် Power Bank၊ ဖုန်းအားသွင်းကြိုး နှင့် ထိုင်းနိုင်ငံသုံး ပလပ်ခေါင်းများ (Type A/C/G)<br>
+                            • ပြန်လည်အသုံးပြုနိုင်သော ရေဗူးများနှင့် လက်သန့်ရှင်းရေး Wet wipes များ
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- EMERGENCY CONTACT LIST (BURMESE) -->
+        <div class="card" id="emergency-section-mm">
+            <h2>🚨 ထိုင်းနိုင်ငံ အရေးပေါ် ဆက်သွယ်ရန်ဖုန်းနံပါတ်များ</h2>
+            <p><em>ထိုင်းနိုင်ငံရှိ ရဲစခန်း၊ ဆေးရုံ နှင့် သံရုံးများ၏ အရေးပေါ် ဆက်သွယ်ရန် ဖုန်းနံပါတ်များ:</em></p>
+
+            <div class="table-responsive">
+                <table>
+                    <tr>
+                        <th><strong>🚓 ရဲစခန်း နှင့် ကမ္ဘာလှည့်ခရီးသွား ကူညီရေး:</strong></th>
+                        <td>
+                            • <strong>ခရီးသွားရဲတပ်ဖွဲ့ ဖုန်းလိုင်း (အင်္ဂလိပ်/ဘာသာစကားမျိုးစုံ):</strong> 1155 (၂၄ နာရီ အခမဲ့ဖုန်း)<br>
+                            • <strong>အထွေထွေ အရေးပေါ် ရဲဖုန်းလိုင်း:</strong> 191<br>
+                            • <strong>မီးသတ် နှင့် ကယ်ဆယ်ရေး:</strong> 199
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>🚑 ဆေးရုံ နှင့် အရေးပေါ် လူနာတင်ယာဉ်:</strong></th>
+                        <td>
+                            • <strong>အရေးပေါ် ဆေးဝါးကူညီရေး / လူနာတင်ယာဉ် Hotline:</strong> 1669<br>
+                            • <strong>Bumrungrad နိုင်ငံတကာဆေးရုံ (ဘန်ကောက်):</strong> +66 2 066 8888 (33 Sukhumvit Soi 3)<br>
+                            • <strong>Bangkok Hospital ပရာတူနမ်အနီး စခန်း:</strong> +66 2 310 3000<br>
+                            • <strong>Bangkok Hospital Pattaya (ပတ္တယားဆေးရုံ):</strong> +66 38 259 999 (301 Moo 6 Sukhumvit Rd)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>🇺🇸 အမေရိကန် သံရုံး (ဘန်ကောက်):</strong></th>
+                        <td>
+                            • <strong>လိပ်စာ:</strong> 95 Wireless Road, Lumpini, Pathumwan, Bangkok 10330<br>
+                            • <strong>ဖုန်း (၂၄ နာရီ အရေးပေါ်ကူညီရေး):</strong> +66 2 205 4000 (ထိုင်းတွင်း: 02 205 4000)<br>
+                            • <strong>ကောင်စစ်ဝန်ဌာန အီးမေးလ်:</strong> ACSBKK@state.gov
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>🇵🇭 ဖိလစ်ပိုင် သံရုံး (ဘန်ကောက်):</strong></th>
+                        <td>
+                            • <strong>လိပ်စာ:</strong> 760 Sukhumvit Road, Soi 30/1, Khlong Toei, Bangkok 10110<br>
+                            • <strong>ဖုန်း (အထွေထွေ):</strong> +66 2 259 0139 / +66 2 258 5401<br>
+                            • <strong>၂၄ နာရီ အရေးပေါ်ဖုန်း:</strong> +66 81 827 4103 / +66 81 868 8312
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>🇲🇲 မြန်မာ သံရုံး (ဘန်ကောက်):</strong></th>
+                        <td>
+                            • <strong>လိပ်စာ:</strong> 132 Sathorn Nua Road, Silom, Bangrak, Bangkok 10500<br>
+                            • <strong>ဖုန်း (အထွေထွေ):</strong> +66 2 233 2237 / +66 2 234 4698<br>
+                            • <strong>ကောင်စစ်ဝန်ရုံး ဖုန်း:</strong> +66 2 233 7250
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- FLIGHT INFORMATION (BURMESE) -->
+        <div class="card" id="flight-section-mm">
+            <h2>✈️ လေယာဉ်ခရီးစဉ် အချက်အလက်များ</h2>
+            <p><em>မိသားစုဝင်များ၏ လေယာဉ်စီးနင်းမှု အချိန်ဇယားများ နှင့် ဘိုကင်နံပါတ်များ:</em></p>
+            <div class="note-box">
+                ℹ️ <em>လေယာဉ်စီးနင်းမှု အသေးစိတ် အချက်အလက်များကို ဘိုကင်များ အတည်ပြုပြီးပါက ဤနေရာတွင် ဖြည့်စွက်ပေးပါမည်။</em>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function switchLanguage(lang) {
+        // Toggle Active Content via Class Manipulation
+        const enContent = document.getElementById('lang-en');
+        const mmContent = document.getElementById('lang-mm');
+        const btnEn = document.getElementById('btn-en');
+        const btnMm = document.getElementById('btn-mm');
+
+        if (lang === 'en') {
+            enContent.classList.add('active-content');
+            mmContent.classList.remove('active-content');
+            btnEn.classList.add('active');
+            btnMm.classList.remove('active');
+        } else {
+            mmContent.classList.add('active-content');
+            enContent.classList.remove('active-content');
+            btnMm.classList.add('active');
+            btnEn.classList.remove('active');
+        }
+
+        // Smooth scroll to top when toggling
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
